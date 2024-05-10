@@ -4,7 +4,7 @@ This is my companion repo to the book ["Seven Languags in Seven Weeks"](https://
 
 Check out my thoughts on:
 
-- [Ruby](./ruby.md)
+- [Ruby](./ruby/thoughts_on_ruby.md)
 
 ## Local development
 
