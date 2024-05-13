@@ -10,7 +10,7 @@
 - I like `unless` and `until` (opposite behaviour of `if` and `while`).
 - Funny working in dynamically-typed language and seeing undeclared variables being fine if the code path doesn't hit them!
 - Nice to see some strong typing; JavaScript's type coercion scares me!
-- duck typing is cool.
+- Duck typing is cool.
 
 ### Day 2
 
@@ -24,3 +24,19 @@
 - Feels weird that collect and map are the same.
 - Don't like the name 'inject' for fold/reduce, but good to know that it's available.
 - Having methods on strings like 'include?' that take Regexps is nice.
+
+### Day 3
+
+- The extent to which classes are open to modification is interesting. Being able to redefine existing methods is different to what I'm used to! But the ability to add new ones seems pretty handy.
+- Open classes and duck typing in particular seem to play nicely together.
+- Adding method like inches, feet, yards and miles to the numeric class is wild! 10.miles.back is so expressive!
+- Using `method_missing` enables pretty cool expressivity but looks dangerous 👀
+- Metaprogramming seems powerful, particularly adding instance methods via mixins and macros using `define_method`!
+
+### Overall
+
+- Duck typing and open classes are pleasant to work with.
+- I like symbols and mixins.
+- Very easy to write expressive code!
+- The reported lack of IDE assistance is a potential worry. Would need to explore further to come to any firm conclusions though.
+- Would like to experiment with Rails.
