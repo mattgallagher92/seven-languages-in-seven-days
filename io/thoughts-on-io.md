@@ -17,3 +17,11 @@
 - The REPL also leaves a bit to be desired, the arrow keys don't do what I want (move cursor in line or cycle through previous commands)
 - Pretty frustrating trying to do stuff like work out how to read a line from stdin!
 
+## Day three
+
+- A custom function for interpreting text between curly brackets is somewhat neat, but doesn't really strike me as grounbreaking compared to other languages. It wouldn't be very hard to write a custom function that does the same thing using FParsec.
+- That said, being able to evaluate text as code is interesting. I guess it requires an interpreted language? At the very least, it'd be harder in a compiled language because the code to be evaluated would first have to be compiled.
+- Overriding forward is a cool trick but doesn't seem worth the cost. I made a small typo while writing the code and it was hard to debug because the unrecognized message was handled by forward!
+- Explicitly yielding control within coroutines seems like a good approach for making control flow obvious. I wonder if this is how the async keyword is implemented in C#, F# and JavaScript.
+- The lightweight syntax for making any object into an actor is pretty nice. However, it doesn't feel like there's much boilerplate in F# (using mailbox processors), for example. There's a bit more for frameworks like Akka, but it's not a lot and they provide more guarantees too.
+- Futures seem cool; somewhat analagous to F# tasks. Deadlock detection sounds useful, but is maybe trumped by F#'s default guarantees of lack of cycles. I would have liked to have played with them a bit more, but `URL` isn't supported in the version of Io that I'm using.
