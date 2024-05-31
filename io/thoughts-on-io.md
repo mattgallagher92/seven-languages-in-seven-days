@@ -26,3 +26,12 @@
 - The lightweight syntax for making any object into an actor is pretty nice. However, it doesn't feel like there's much boilerplate in F# (using mailbox processors), for example. There's a bit more for frameworks like Akka, but it's not a lot and they provide more guarantees too.
 - Futures seem cool; somewhat analagous to F# tasks. Deadlock detection sounds useful, but is maybe trumped by F#'s default guarantees of lack of cycles. I would have liked to have played with them a bit more, but `URL` isn't supported in the version of Io that I'm using.
 - Looks to me like there's another mistake: on page 86 it says that the arguments are computed inside out, which implies eager loading to me, but it looks like lazy loading - arguments that I would expect to be a map if eagerly loaded are coming through as messages.
+
+## Overall
+
+- Don't think I particularly like prototype languages, but it's good to think about them more because of JavaScript's popularity.
+- Io seems so permissive; I don't feel like I'm being guided into the pit of success.
+- The simplicity of message passing is quite cool, and the uniformity means that I feel like I already know the important concepts already..
+- The lack of basic quality of life features like a REPL that I can move around in using arrow keys, and good documentaiton is a real drawback.
+- I think the balance of syntax sugar is not to my taste. I like a language that's sweeter.
+- The language feels almost dead in 2024. It was very hard to find any active communities or information.
