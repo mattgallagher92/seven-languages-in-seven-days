@@ -19,7 +19,7 @@
 
 ## Day three
 
-- A custom function for interpreting text between curly brackets is somewhat neat, but doesn't really strike me as grounbreaking compared to other languages. It wouldn't be very hard to write a custom function that does the same thing using FParsec.
+- A custom function for interpreting text between curly brackets is somewhat neat, but doesn't really strike me as groundbreaking compared to other languages. It wouldn't be very hard to write a custom function that does the same thing using FParsec.
 - That said, being able to evaluate text as code is interesting. I guess it requires an interpreted language? At the very least, it'd be harder in a compiled language because the code to be evaluated would first have to be compiled.
 - Overriding forward is a cool trick but doesn't seem worth the cost. I made a small typo while writing the code and it was hard to debug because the unrecognized message was handled by forward!
 - Explicitly yielding control within coroutines seems like a good approach for making control flow obvious. I wonder if this is how the async keyword is implemented in C#, F# and JavaScript.
