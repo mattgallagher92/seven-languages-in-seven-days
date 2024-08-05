@@ -1,4 +1,4 @@
-% swap(X, Y, Move, Swapped) holds when Swapped is the result of replacing move(N, X) with move(N, Y0) and vice versa.
+% swap(X, Y, Move, Swapped) holds when Swapped is the result of replacing move(N, X) with move(N, Y) and vice versa.
 swap(X, Y, move(N, X), move(N, Y)).
 swap(X, Y, move(N, Y), move(N, X)).
 swap(X, Y, move(N, Z), move(N, Z)) :- Z \= X, Z \= Y.
@@ -11,7 +11,7 @@ swapMany(X, Y, [H|T], [SH|ST]) :- swap(X, Y, H, SH), swapMany(X, Y, T, ST).
 towerOfHanoi(1, [ move(1, c) ]).
 towerOfHanoi(N, Solution) :-
     N > 1, N1 is N - 1,
-    % S1 gets first N-1 discs from a to c bia b.
+    % S1 gets first N-1 discs from a to c via b.
     towerOfHanoi(N1, S1),
     % S1bc gets first N-1 discs from a to b via c.
     swapMany(b, c, S1, S1bc),

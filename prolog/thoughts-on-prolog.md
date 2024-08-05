@@ -14,6 +14,7 @@
 - Unification feels conceptually similar to pattern matching. However, it's clear that being able to match on both sides, as exemplified by `append` is really powerful. Calculating which two lists could be appended to give two lists (`append(One, Two, [apples, oranges, bananas]).`) blew me away. I'm not certain of a simple generic approach that I'd use for such a problem in F#.
 - What's even better is that something that surprised me with its power has such a simple implementation.
 - Not being able to use `N - 1` as a subexpression and having to unify it with something else first, for example `N1 is N - 1`, feels slightly weird.
-- Took me a little bit of time to get my head around the required syntax for affecting the "result" of a "function", as it's just an expression in a rule (particularly noticable in the merge rule in [./merge.pl](./merge.pl)).
+- Took me a little bit of time to get my head around the required syntax for affecting the "result" of a "function", as it's just an expression in a rule (particularly noticable in the merge rule in [./day2/merge.pl](./day2/merge.pl)).
 - Negation is a little fiddly. I might want to express that `X` is not some value, `a`, as `\+ X = a`. That goal fails if `X` is a free variable at the point of evaluation, because its negation (the goal `X = a`) is provable when `X` has the value `a`. If you want to exclude certain values, you need to make sure that such a negated goal comes at a point where all of its variables have been bound to something.
 - I'm still struggling to think in Prolog. I'm having to translate into it, which is possible but currently time consuming and error prone.
+
