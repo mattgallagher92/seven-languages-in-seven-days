@@ -7,6 +7,7 @@ Check out my thoughts on:
 - [Ruby](./ruby/thoughts-on-ruby.md)
 - [Io](./io/thoughts-on-io.md)
 - [Prolog](./prolog/thoughts-on-prolog.md)
+- [Scala](./scala/thoughts-on-scala.md)
 
 ## Local development
 
