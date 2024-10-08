@@ -24,9 +24,11 @@ def getPageSizeSequentially() = {
 }
 
 def getPageSizeConcurrently() = {
+  // `self` is apparently an implicit actor associated with the current execution context.
   val caller = self
 
   for(url <- urls) {
+    // Need to use actors here to avoid blocking while waiting for getPageSize to return.
     actor { caller ! (url, PageLoader.getPageSize(url)) }
   }
 
