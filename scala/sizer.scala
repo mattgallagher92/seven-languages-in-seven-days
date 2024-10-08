@@ -38,6 +38,10 @@ def getPageSizeConcurrently() = {
   }
 }
 
+// There seems to be some speed up after the first fetch.
+println("Warming up...")
+timeMethod { getPageSizeConcurrently }
+
 println("Sequential run:")
 timeMethod { getPageSizeSequentially }
 
