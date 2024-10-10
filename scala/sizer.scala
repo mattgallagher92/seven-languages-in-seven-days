@@ -3,7 +3,7 @@ import scala.actors._
 import Actor._
 
 object PageLoader {
-  def getPageSizeAndLinks(url : String) = {
+  def getPageSizeAndLinks(url: String) = {
     val sourceString = Source.fromURL(url).mkString
     val linkCount = "</a>".r.findAllIn(sourceString).length
     val linkExtractionRegex = "<a[^>]+?href=\"(.+?)\"".r
@@ -19,23 +19,24 @@ def timeMethod(method: () => Unit) = {
   val start = System.nanoTime
   method()
   val end = System.nanoTime
-  println("Method took " + (end - start)/1000000000.0 + " seconds.")
+  println("\nMethod took " + (end - start)/1000000000.0 + " seconds.")
 }
 
-def createMessage(url: String, size : Int, links : Array[String]) = {
+def createMessage(url: String, size: Int, links: Array[String]) = {
   val linkLines = links.mkString("\n    ")
   s"""
   Size of $url: $size
   Links in $url:
-    $linkLines
-  """
+    $linkLines"""
 }
 
 def getPageSizeAndLinksSequentially() = {
-  for(url <- urls) {
-    val (size, links) = PageLoader.getPageSizeAndLinks(url)
-    println(createMessage(url, size, links))
-  }
+  urls
+    .map(url => {
+      val (size, links) = PageLoader.getPageSizeAndLinks(url)
+      createMessage(url, size, links)
+    })
+    .mkString("\n")
 }
 
 def getPageSizeAndLinksConcurrently() = {
@@ -47,20 +48,22 @@ def getPageSizeAndLinksConcurrently() = {
     actor { caller ! (url, PageLoader.getPageSizeAndLinks(url)) }
   }
 
+  var msg = ""
   for(i <- 1 to urls.size) {
     receive {
-      case (url : String, (size : Int, links : Array[String])) =>
-        println(createMessage(url, size, links))
+      case (url: String, (size: Int, links: Array[String])) =>
+        msg += createMessage(url, size, links) + "\n"
     }
   }
+  msg
 }
 
 // There seems to be some speed up after the first fetch.
 println("Warming up...")
-timeMethod { getPageSizeAndLinksConcurrently }
+getPageSizeAndLinksConcurrently
 
-println("Sequential run:")
-timeMethod { getPageSizeAndLinksSequentially }
+println("\nSequential run:")
+timeMethod { () => println(getPageSizeAndLinksSequentially) }
 
-println("Concurrent run")
-timeMethod { getPageSizeAndLinksConcurrently }
+println("\nConcurrent run:")
+timeMethod { () => println(getPageSizeAndLinksConcurrently) }
