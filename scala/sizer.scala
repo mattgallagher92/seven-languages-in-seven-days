@@ -5,15 +5,23 @@ import Actor._
 object PageLoader {
   def getPageSizeAndLinks(url: String) = {
     val sourceString = Source.fromURL(url).mkString
-    val linkCount = "</a>".r.findAllIn(sourceString).length
     val linkExtractionRegex = "<a[^>]+?href=\"(.+?)\"".r
-    val links = linkExtractionRegex.findAllIn(sourceString).matchData.map(_.group(1)).toArray
+    val links =
+      linkExtractionRegex
+        .findAllIn(sourceString)
+        .matchData
+        .map(_.group(1))
+        .toArray
     (sourceString.length, links)
   }
 }
 
-// Other common sites aren't working, I suspect due to HTTPS redirects.
-val urls = List("http://www.google.co.uk/", "http://www.google.com/", "http://www.google.ca/")
+// Most sites don't work!
+// Some sites fail due to rate limiting; some sites seem to have 0 links, maybe because of SPAs 🤷
+val urls = List(
+  "https://example.com",
+  "https://example.org"
+)
 
 def timeMethod(method: () => Unit) = {
   val start = System.nanoTime
@@ -22,37 +30,60 @@ def timeMethod(method: () => Unit) = {
   println("\nMethod took " + (end - start)/1000000000.0 + " seconds.")
 }
 
-def createMessage(url: String, size: Int, links: Array[String]) = {
-  val linkLines = links.mkString("\n    ")
-  s"""
-  Size of $url: $size
-  Links in $url:
-    $linkLines"""
+def createMessage(url: String, linkCount: Int, totalSize: Int) = {
+  s"$url has $linkCount links. The total size of $url and its children is $totalSize"
 }
 
 def getPageSizeAndLinksSequentially() = {
   urls
     .map(url => {
       val (size, links) = PageLoader.getPageSizeAndLinks(url)
-      createMessage(url, size, links)
+
+      var totalSize = size
+      links.foreach(link => {
+        val (pageSize, _) = PageLoader.getPageSizeAndLinks(link)
+        totalSize += pageSize
+      })
+
+      createMessage(url, links.length, totalSize)
     })
     .mkString("\n")
 }
 
 def getPageSizeAndLinksConcurrently() = {
   // `self` is apparently an implicit actor associated with the current execution context.
-  val caller = self
+  val outerActor = self
 
-  for(url <- urls) {
+  urls.foreach(url => {
     // Need to use actors here to avoid blocking while waiting for getPageSizeAndLinks to return.
-    actor { caller ! (url, PageLoader.getPageSizeAndLinks(url)) }
-  }
+    actor {
+      val (size, links) = PageLoader.getPageSizeAndLinks(url)
+
+      val innerActor = self
+      links.foreach(link => {
+        actor {
+          val (pageSize, _) = PageLoader.getPageSizeAndLinks(link)
+          innerActor ! pageSize
+        }
+      })
+
+      var totalSize = size
+      for(i <- 1 to links.size) {
+        receive {
+          case (pageSize: Int) => totalSize += pageSize
+        }
+      }
+
+      outerActor ! (url, links.length, totalSize)
+    }
+  })
 
   var msg = ""
   for(i <- 1 to urls.size) {
+    // Using receive rather than react ensures that the function doesn't exit before the messages have returned.
     receive {
-      case (url: String, (size: Int, links: Array[String])) =>
-        msg += createMessage(url, size, links) + "\n"
+      case (url: String, linkCount: Int, totalSize: Int) =>
+        msg += createMessage(url, linkCount, totalSize) + "\n"
     }
   }
   msg
