@@ -16,12 +16,8 @@ value_for_keyword(Keyword, [_ | T]) ->
 %day_2:value_for_keyword(dog, [{mouse, "Squeak"}, {cat, "Meow"}, {dog, "Woof"}]).
 %"Woof"
 
-% TODO: would be nice if this could be an inner function inside subtotals.
-subtotal({Item, Quantity, Price}) ->
-        {Item, Quantity * Price}.
-
 subtotals(ShoppingList) ->
-        [subtotal(X) || X <- ShoppingList].
+        [{Item, Quantity * Price} || {Item, Quantity, Price} <- ShoppingList].
 
 % subtotals([{onions, 3, 0.50}, {tomatoes, 2, 0.59}, {mushrooms, 10, 0.12}]).
 % [{onions,1.5},{tomatoes,1.18},{mushrooms,1.2}]
