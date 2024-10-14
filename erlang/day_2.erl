@@ -6,12 +6,10 @@
 
 value_for_keyword(_, []) ->
         not_found;
-value_for_keyword(Keyword, [{K, V} | T]) ->
-        if K == Keyword ->
-                   V;
-           true ->
-                   value_for_keyword(Keyword, T)
-        end.
+value_for_keyword(Keyword, [{Keyword, V} | _]) ->
+        V;
+value_for_keyword(Keyword, [_ | T]) ->
+        value_for_keyword(Keyword, T).
 
 %day_2:value_for_keyword(dog, [{mouse, "Squeak"}, {cat, "Meow"}]).
 %not_found
