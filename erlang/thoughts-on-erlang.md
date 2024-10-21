@@ -20,3 +20,10 @@
 - Particularly dislike that you don't get a compiler warning you about non-exhaustive pattern matching.
 - Quite like explicit module exports.
 - Integers are big 😳
+
+## Day two
+
+- Like case expressions, ifs are okay. Again feels weird without exhaustive matching.
+- `lists` module seems to have a good range of functions.
+- List comprehenstions are nice.
+- I find declaring different patterns for the same functions as separate code elements a bit odd.
