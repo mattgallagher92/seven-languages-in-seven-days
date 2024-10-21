@@ -8,6 +8,7 @@ Check out my thoughts on:
 - [Io](./io/thoughts-on-io.md)
 - [Prolog](./prolog/thoughts-on-prolog.md)
 - [Scala](./scala/thoughts-on-scala.md)
+- [Erlang](./erlang/thoughts-on-erlang.md)
 
 ## Local development
 
