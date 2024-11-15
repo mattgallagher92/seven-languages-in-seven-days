@@ -1,8 +1,6 @@
-# Ruby
+# Thoughts on Ruby
 
-## Thoughts
-
-### Day 1
+## Day 1
 
 - 'puts' and 'gets' for writing to and reading from stdout is interesting. A bit more vivid than usual names.
 - Cool that you can put if/unless at the end of lines! Reads a bit more like English.
@@ -12,7 +10,7 @@
 - Nice to see some strong typing; JavaScript's type coercion scares me!
 - Duck typing is cool.
 
-### Day 2
+## Day 2
 
 - Didn't pick up on this yesterday - nice that functions don't have to be associated to classes!
 - Feels kind of weird having one collection type (arrays) with the behaviour for queues, linked lists, stacks and sets. Convenient in a way, but must be hard to optimise.
@@ -25,7 +23,7 @@
 - Don't like the name 'inject' for fold/reduce, but good to know that it's available.
 - Having methods on strings like 'include?' that take Regexps is nice.
 
-### Day 3
+## Day 3
 
 - The extent to which classes are open to modification is interesting. Being able to redefine existing methods is different to what I'm used to! But the ability to add new ones seems pretty handy.
 - Open classes and duck typing in particular seem to play nicely together.
@@ -33,7 +31,7 @@
 - Using `method_missing` enables pretty cool expressivity but looks dangerous 👀
 - Metaprogramming seems powerful, particularly adding instance methods via mixins and macros using `define_method`!
 
-### Overall
+## Overall
 
 - Duck typing and open classes are pleasant to work with.
 - I like symbols and mixins.
