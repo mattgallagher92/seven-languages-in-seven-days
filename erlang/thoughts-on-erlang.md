@@ -1,4 +1,4 @@
-# Thoughts on Prolog
+# Thoughts on Erlang
 
 ## Introduction
 
