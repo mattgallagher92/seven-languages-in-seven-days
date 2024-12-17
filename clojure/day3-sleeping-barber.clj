@@ -47,7 +47,7 @@
    (let [n @barberChair]
      (Thread/sleep 20) (haveHairCut n) (ref-set barberChair nil) (callNextCustomer))))
 
-; Cusomter behaviour:
+; Customer behaviour:
 ; - If barber's seat is empty on arrival, sit in it and wake barber.
 ; - If barber's seat is occupied on arrival but there is empty chair in the waiting room, sit in it, noting number of customers ahead.
 ; - If there are no available seats on arrival, leave.
