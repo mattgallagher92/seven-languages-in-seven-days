@@ -43,9 +43,10 @@
         nil))))
 
 (defn cutHair []
-  (dosync
-   (let [n @barberChair]
-     (Thread/sleep 20) (haveHairCut n) (ref-set barberChair nil) (callNextCustomer))))
+  ; NOTE: important not to sleep within the transaction otherwise conflicts (which there will likely be because of the
+  ; long time) will cause the transaction to fail and retry, conflicting again!
+  (Thread/sleep 20)
+  (dosync (let [n @barberChair] (haveHairCut n) (ref-set barberChair nil) (callNextCustomer))))
 
 ; Customer behaviour:
 ; - If barber's seat is empty on arrival, sit in it and wake barber.
@@ -91,9 +92,6 @@
 @barberFuture
 @customersFuture
 
-; NOTE: only a very small number of customers have their hair cut (~70 / 500). The barber loop is taking over 100 ms on
-; average; so there's are fewer than 100 iterations. That, along with contention explains the observed numbers.
-; I don't intend to fix this for now as the actual logic and use of Clojure async primitibes seems to be working.
 (println
  (count (filter #(= :cut %) @customers)) "customers had their hair cut,"
  (count (filter #(= :uncut %) @customers)) "left without having their hair cut,"
