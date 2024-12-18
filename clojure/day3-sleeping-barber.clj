@@ -73,18 +73,20 @@
 
 (def barberFuture
   (future
-    (loop []
+    (loop [counter 0]
       (when (timeIntervalLessThanTenSeconds startTime (System/nanoTime))
+        (println "Barber loop" counter)
         (if @barber
           (cutHair)
           ; Avoid looping hundreds of thousands of times!
           (Thread/sleep 1))
-        (recur)))))
+        (recur (inc counter))))))
 
 (def customersFuture
   (future
     (loop [counter 0]
       (Thread/sleep (+ 10 (rand-int 21)))
+      (println "Customer" counter "entering shop.")
       (future (enterBarberShop counter))
       (when (timeIntervalLessThanTenSeconds startTime (System/nanoTime))
         (recur (inc counter))))))
