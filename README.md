@@ -1,6 +1,6 @@
 # Seven languages in seven weeks
 
-This is my companion repo to the book ["Seven Languags in Seven Weeks"](https://archive.org/details/sevenlanguagesin00tate). I used it to make some thoughts on the languages as I worked my way through the book.
+This is my companion repo to the book ["Seven Languages in Seven Weeks"](https://archive.org/details/sevenlanguagesin00tate). I used it to make some thoughts on the languages as I worked my way through the book.
 
 Check out my thoughts on:
 
