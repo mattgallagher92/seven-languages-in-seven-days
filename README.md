@@ -10,6 +10,7 @@ Check out my thoughts on:
 - [Scala](./scala/thoughts-on-scala.md)
 - [Erlang](./erlang/thoughts-on-erlang.md)
 - [Clojure](./clojure/thoughts-on-clojure.md)
+- [Haskell](./haskell/thoughts-on-haskell.md)
 
 ## Local development
 
