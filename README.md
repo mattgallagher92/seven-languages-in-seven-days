@@ -9,6 +9,7 @@ Check out my thoughts on:
 - [Prolog](./prolog/thoughts-on-prolog.md)
 - [Scala](./scala/thoughts-on-scala.md)
 - [Erlang](./erlang/thoughts-on-erlang.md)
+- [Clojure](./clojure/thoughts-on-clojure.md)
 
 ## Local development
 
