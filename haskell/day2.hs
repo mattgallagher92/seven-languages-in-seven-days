@@ -27,4 +27,21 @@ everyEighthFromSumOf x y = zipWith (+) (everyThirdFrom x) (everyFifthFrom y)
 half = flip (/) 
 appendNewline = flip (++) "\n"
 
--- TODO: more demanding problems.
+myGcd :: Int -> Int -> Int
+myGcd a 0 = a
+myGcd 0 b = b
+myGcd a b = if a > b then myGcd (a `mod` b) b else myGcd a (b `mod` a)
+
+lazyPrimes :: [Int] -> [Int]
+lazyPrimes prevs =
+    let 
+        isDivisibleBy a b = mod a b == 0
+        isDivisibleByAny a bs = any (\b -> isDivisibleBy a b) bs
+        prev = head prevs
+        next = head (filter (\n -> not (isDivisibleByAny n prevs)) [(prev+1) ..])
+    in
+        next:(lazyPrimes (next:prevs))
+
+primes = 2:(lazyPrimes [2])
+
+-- TODO: word boundaries problems.
