@@ -24,7 +24,7 @@ everyFifthFrom y = y:everyFifthFrom (y+5)
 -- I assume that the language is being used loosely.
 everyEighthFromSumOf x y = zipWith (+) (everyThirdFrom x) (everyFifthFrom y)
 
-half = flip (/) 
+half = flip (/) 2
 appendNewline = flip (++) "\n"
 
 myGcd :: Int -> Int -> Int
@@ -34,7 +34,7 @@ myGcd a b = if a > b then myGcd (a `mod` b) b else myGcd a (b `mod` a)
 
 lazyPrimes :: [Int] -> [Int]
 lazyPrimes prevs =
-    let 
+    let
         isDivisibleBy a b = mod a b == 0
         isDivisibleByAny a bs = any (\b -> isDivisibleBy a b) bs
         prev = head prevs
